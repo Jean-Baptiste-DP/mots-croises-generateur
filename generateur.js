@@ -182,25 +182,9 @@ class Generateur{
         }
         while(this.schemaSum(needed)>0){
             this.choseBestWord(needed, grid)
-
-            // let finalGrid = this.assembleGrid(grid)
-
-            // for(let i=0; i<this.dim; i++){
-            //     console.log(finalGrid[i])
-            // }
-
-            // console.log('\n$$$$$$$$$$$\n')
-
-            console.log(this.schemaSum(needed))
         }
 
-        let finalGrid = this.assembleGrid(grid)
-
-        for(let i=0; i<this.dim; i++){
-            console.log(finalGrid[i])
-        }
-
-        console.log('\n$$$$$$$$$$$\n')
+        return this.assembleGrid(grid)
     }
 
     assembleGrid(grid){
@@ -220,5 +204,4 @@ class Generateur{
     }
 }
 
-let gen = new Generateur(11, [4,5,3,3,1,2])
-console.log(gen.generatGrid())
+module.exports = Generateur;
