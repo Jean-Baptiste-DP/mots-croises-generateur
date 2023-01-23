@@ -167,23 +167,33 @@ class Generateur{
     }
 
     generatGrid(){
-        let needed = [...this.schema]
+        let sum = 10
         let grid = new Array(this.dim)
-
-        for(let i=0; i<this.dim; i++){
-            grid[i] = new Array(this.dim)
-            for(let j=0; j<this.dim; j++){
-                grid[i][j] = {
-                    letter : "-",
-                    allowVert : true,
-                    allowHorz : true
+        let nb_try = 0
+        while(sum>0){
+            nb_try+=1
+            console.log("New Try")
+            let needed = [...this.schema]
+            
+            for(let i=0; i<this.dim; i++){
+                grid[i] = new Array(this.dim)
+                for(let j=0; j<this.dim; j++){
+                    grid[i][j] = {
+                        letter : "-",
+                        allowVert : true,
+                        allowHorz : true
+                    }
                 }
             }
-        }
-        while(this.schemaSum(needed)>0){
-            this.choseBestWord(needed, grid)
-        }
+            let iteration = 0
+            while(this.schemaSum(needed)>0 && iteration<500){
+                iteration+=1;
+                this.choseBestWord(needed, grid)
+            }
 
+            sum = this.schemaSum(needed)
+        }
+        console.log("Number of try ", nb_try)
         return this.assembleGrid(grid)
     }
 
@@ -199,7 +209,8 @@ class Generateur{
 
             finalGrid[i]=ligne
         }
-
+        console.log('§§§§§§§§')
+        console.log('Sended')
         return finalGrid
     }
 }
