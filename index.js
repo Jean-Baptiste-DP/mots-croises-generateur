@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const server = require('http').createServer(app);
@@ -13,4 +14,4 @@ app.get('/', (req, res) => {
     res.json(fichier);
 })
 
-server.listen(10206, () => console.log(`Lisening on port :10206`))
+server.listen(parseInt(process.env.APP_PORT), () => console.log(`Lisening on port :`+process.env.APP_PORT))

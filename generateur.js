@@ -1,4 +1,5 @@
-const mots = require('./wordList.js')
+require('dotenv').config()
+const mots = require(process.env.LANGUAGE_WORDS)
 
 class Generateur{
     constructor(dim, schema){
