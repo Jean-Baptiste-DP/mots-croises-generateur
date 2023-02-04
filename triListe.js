@@ -1,4 +1,4 @@
-// This file allow you to precompute the words you want to use in the crossword.
+// This file allows you to precompute the words you want to use in the crossword.
 // By default, a set of words is already done in French and English.
 // To generate the file, you need to have an input file which have this characteristic :
 //      - a text file
