@@ -7,11 +7,13 @@ class Generateur{
         this.schema = schema; //liste nombre de mots de longueur (ex: schema[0] : nb de mots de longueur 3, schema[1] de longueur 4 etc)
     }
 
-    getWord(length){
+    getWord(length){// tested
+        //choose a random word in the list
         return mots[length-3][Math.floor(Math.random() * mots[length-3].length)]
     }
 
-    weightPosition(word, x, y, orient, grid){ //grid[x][y] 1st letter position, orient : true=horizontal / false=vertical
+    weightPosition(word, x, y, orient, grid){ 
+        //grid[x][y] 1st letter position, orient : true=horizontal / false=vertical
         //return 0 if position not possible, and bigger the value is, better the position is
 
         let x_bis = x - !orient
@@ -159,7 +161,8 @@ class Generateur{
         }
     }
 
-    schemaSum(schema){
+    schemaSum(schema){ //tested
+        //return the number of word that are not placed
         let sum = 0;
         for(let i=0; i<schema.length; i++){
             sum+=schema[i]
@@ -167,25 +170,30 @@ class Generateur{
         return sum
     }
 
+    emptyGrid(){
+        // generate an empty grid with all the need to construct the crossword
+        let grid = new Array(this.dim)
+        for(let i=0; i<this.dim; i++){
+            grid[i] = new Array(this.dim)
+            for(let j=0; j<this.dim; j++){
+                grid[i][j] = {
+                    letter : "-",
+                    allowVert : true,
+                    allowHorz : true
+                }
+            }
+        }
+        return grid
+    }
+
     generatGrid(){
         let sum = 10
-        let grid = new Array(this.dim)
         let nb_try = 0
         while(sum>0){
             nb_try+=1
             console.log("New Try")
             let needed = [...this.schema]
-            
-            for(let i=0; i<this.dim; i++){
-                grid[i] = new Array(this.dim)
-                for(let j=0; j<this.dim; j++){
-                    grid[i][j] = {
-                        letter : "-",
-                        allowVert : true,
-                        allowHorz : true
-                    }
-                }
-            }
+            let grid = this.emptyGrid()
             let iteration = 0
             while(this.schemaSum(needed)>0 && iteration<500){
                 iteration+=1;
