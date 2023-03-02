@@ -7,12 +7,12 @@ class Generateur{
         this.schema = schema; //liste nombre de mots de longueur (ex: schema[0] : nb de mots de longueur 3, schema[1] de longueur 4 etc)
     }
 
-    getWord(length){// tested
+    getWord(length){
         //choose a random word in the list
         return mots[length-3][Math.floor(Math.random() * mots[length-3].length)]
     }
 
-    weightPosition(word, x, y, orient, grid){ 
+    weightPosition(word, x, y, orient, grid){
         //grid[x][y] 1st letter position, orient : true=horizontal / false=vertical
         //return 0 if position not possible, and bigger the value is, better the position is
 
@@ -102,6 +102,7 @@ class Generateur{
     }
 
     applyWord(position, grid){
+        //put a word in the grid
         let x_bis = position.x - !position.orient;
         let y_bis = position.y - position.orient;
 
@@ -142,6 +143,7 @@ class Generateur{
     }
 
     choseBestWord(schema, grid){
+        //choose the world that fit the best in the grid
         let bestPosition = {weight:0};
         let index=-1
 
@@ -154,14 +156,13 @@ class Generateur{
                 }
             }
         }
-        
         if(bestPosition.weight>=7){
             this.applyWord(bestPosition, grid)
             schema[index]-=1
         }
     }
 
-    schemaSum(schema){ //tested
+    schemaSum(schema){
         //return the number of word that are not placed
         let sum = 0;
         for(let i=0; i<schema.length; i++){
@@ -189,11 +190,11 @@ class Generateur{
     generatGrid(){
         let sum = 10
         let nb_try = 0
+        let grid
         while(sum>0){
             nb_try+=1
-            console.log("New Try")
             let needed = [...this.schema]
-            let grid = this.emptyGrid()
+            grid = this.emptyGrid()
             let iteration = 0
             while(this.schemaSum(needed)>0 && iteration<500){
                 iteration+=1;
@@ -202,7 +203,6 @@ class Generateur{
 
             sum = this.schemaSum(needed)
         }
-        console.log("Number of try ", nb_try)
         return this.assembleGrid(grid)
     }
 
@@ -218,8 +218,6 @@ class Generateur{
 
             finalGrid[i]=ligne
         }
-        console.log('§§§§§§§§')
-        console.log('Sended')
         return finalGrid
     }
 }
