@@ -15,6 +15,12 @@ npm install
 node index.js
 ```
 
+## Run tests
+
+```bash
+npm test
+```
+
 ## Change parameters
 
 By default, the server is running on port 10206, it can be changed in the [.env](https://github.com/Jean-Baptiste-DP/mots-croises-generateur/blob/main/.env) file.
