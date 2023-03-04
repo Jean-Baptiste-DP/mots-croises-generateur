@@ -195,3 +195,7 @@ test("General test", ()=>{
         expect(finalGrid[x]).toMatch(/[A-Z]*/);
     }
 })
+
+test("testing ability to merge", ()=>{
+    expect(1).toBe(0);
+})
