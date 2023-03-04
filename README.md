@@ -12,7 +12,7 @@ npm install
 ## Run server
 
 ```bash
-node index.js
+npm start
 ```
 
 ## Run tests
